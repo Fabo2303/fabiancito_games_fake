@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pong</title>
+    <link rel="stylesheet" th:href="@{/pong/pong.css}">
+</head>
+<body>
+<h1>PONG</h1>
+<h4>Player 1 - Player 2</h4>
+<h4><span id="player1-score">0</span> - <span id="player2-score">0</span></h4>
+<canvas id="pong" width="600" height="400"></canvas>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script th:src="@{/pong/pong.js}"></script>
+
+</body>
+</html>

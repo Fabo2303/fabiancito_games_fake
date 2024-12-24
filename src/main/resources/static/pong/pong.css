@@ -1,0 +1,13 @@
+body{
+    background-color: #000;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+}
+
+canvas{
+    display: block;
+    margin: 0 auto;
+    background-color: #000;
+    border: 2px solid #fff;
+}
