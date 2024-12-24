@@ -1,8 +1,7 @@
-package com.example.fabiancitogames;
+package com.example.fabiancitogames.utils;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -13,7 +12,7 @@ public class GameSession {
     public int assignRole(String sessionId) {
         if (!sessionRoles.containsKey(sessionId)) {
             sessionRoles.put(sessionId, nextRole);
-            nextRole = (nextRole % 2) + 1; // Alterna entre 1 y 2
+            nextRole = (nextRole % 2) + 1;
         }
         return sessionRoles.get(sessionId);
     }
@@ -24,5 +23,9 @@ public class GameSession {
 
     public void removeRole(String sessionId){
         sessionRoles.remove(sessionId);
+        for (String key : sessionRoles.keySet()) {
+            sessionRoles.put(key, nextRole);
+            nextRole = (nextRole % 2) + 1;
+        }
     }
 }

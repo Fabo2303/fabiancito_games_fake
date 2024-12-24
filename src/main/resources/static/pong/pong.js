@@ -1,5 +1,10 @@
-const socket = new SockJS('/game');
+console.log("Pong game script loaded");
+console.log(rutas.base_game);
+console.log(rutas.base_game === '/game');
+
+const socket = new SockJS(rutas.base_game);
 const stompClient = Stomp.over(socket);
+
 
 const canvas = document.getElementById('pong');
 const ctx = canvas.getContext('2d');
@@ -43,7 +48,7 @@ function connect() {
     stompClient.connect({}, () => {
         console.log("Connected to WebSocket");
 
-        stompClient.subscribe('/queue/role', (data) => {
+        stompClient.subscribe(rutas.queue_pong_role, (data) => {
             if (playerRole === null) {
                 playerRole = parseInt(data.body);
             }
@@ -53,7 +58,7 @@ function connect() {
             }
         });
 
-        stompClient.subscribe('/game/ready', (data) => {
+        stompClient.subscribe(rutas.queue_pong_ready, (data) => {
             playersReady = parseInt(data.body);
             console.log(`Players ready: ${playersReady}`);
             if (playersReady === 2) {
@@ -62,11 +67,11 @@ function connect() {
             }
         });
 
-        stompClient.send("/app/pong/join", {}, {});
-        stompClient.send('/app/pong/ready', {}, {});
+        stompClient.send("/app" + rutas.pong_join, {}, {});
+        stompClient.send("/app" + rutas.pong_ready, {}, {});
 
         // Suscríbete a los canales necesarios
-        stompClient.subscribe('/game/ball', (data) => {
+        stompClient.subscribe(rutas.game_pong_ball, (data) => {
             const ballMovement = JSON.parse(data.body);
             ball.x = ballMovement.positionX;
             ball.y = ballMovement.positionY;
@@ -74,7 +79,7 @@ function connect() {
             drawPaddles();
         });
 
-        stompClient.subscribe('/game/paddle', (data) => {
+        stompClient.subscribe(rutas.game_pong_paddle, (data) => {
             const paddleMovement = JSON.parse(data.body);
             if (paddleMovement.playerId === 1) {
                 player1.y = paddleMovement.positionY;
@@ -94,7 +99,7 @@ function sendBallMovement() {
         speedX: ball.velocityX,
         speedY: ball.velocityY
     };
-    stompClient.send('/app/pong/moveBall', {}, JSON.stringify(ballMovement));
+    //stompClient.send('/app' + rutas.pong_move_ball, {}, JSON.stringify(ballMovement));
 }
 
 function sendPaddleMovement() {
@@ -110,7 +115,7 @@ function sendPaddleMovement() {
             positionY: player2.y
         };
     }
-    stompClient.send('/app/pong/movePaddle', {}, JSON.stringify(paddleMovement));
+    stompClient.send('/app' + rutas.pong_move_paddle, {}, JSON.stringify(paddleMovement));
 }
 
 

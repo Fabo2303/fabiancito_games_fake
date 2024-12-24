@@ -15,6 +15,34 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script th:inline="javascript">
+    const rutas = {
+        base_game: '[[${T(com.example.fabiancitogames.utils.Routes).BASE_GAME}]]',
+        base_pong: '[[${T(com.example.fabiancitogames.utils.Routes).PONG}]]',
+        join: '[[${T(com.example.fabiancitogames.utils.Routes).JOIN}]]',
+        ready: '[[${T(com.example.fabiancitogames.utils.Routes).READY}]]',
+        exit: '[[${T(com.example.fabiancitogames.utils.Routes).EXIT}]]',
+        role: '[[${T(com.example.fabiancitogames.utils.Routes).ROLE}]]',
+        ball: '[[${T(com.example.fabiancitogames.utils.Routes).BALL}]]',
+        paddle: '[[${T(com.example.fabiancitogames.utils.Routes).PADDLE}]]',
+        move_ball: '[[${T(com.example.fabiancitogames.utils.Routes).MOVE_BALL}]]',
+        move_paddle: '[[${T(com.example.fabiancitogames.utils.Routes).MOVE_PADDLE}]]',
+        pong_ready: '[[${T(com.example.fabiancitogames.utils.Routes).PONG_READY}]]',
+        pong_join: '[[${T(com.example.fabiancitogames.utils.Routes).PONG_JOIN}]]',
+        pong_exit: '[[${T(com.example.fabiancitogames.utils.Routes).PONG_EXIT}]]',
+        queue_pong_role: '[[${T(com.example.fabiancitogames.utils.Routes).QUEUE_PONG_ROLE}]]',
+        queue_pong_ready: '[[${T(com.example.fabiancitogames.utils.Routes).QUEUE_PONG_READY}]]',
+        game_pong_ball: '[[${T(com.example.fabiancitogames.utils.Routes).GAME_PONG_BALL}]]',
+        game_pong_paddle: '[[${T(com.example.fabiancitogames.utils.Routes).GAME_PONG_PADDLE}]]',
+        pong_move_ball: '[[${T(com.example.fabiancitogames.utils.Routes).PONG_MOVE_BALL}]]',
+        pong_move_paddle: '[[${T(com.example.fabiancitogames.utils.Routes).PONG_MOVE_PADDLE}]]'
+    }
+
+    Object.keys(rutas).forEach(key => {
+        rutas[key] = rutas[key].replaceAll('"', '');
+    });
+
+</script>
 <script th:src="@{/pong/pong.js}"></script>
 
 </body>

@@ -1,6 +1,7 @@
 package com.example.fabiancitogames.pong;
 
-import com.example.fabiancitogames.GameSession;
+import com.example.fabiancitogames.utils.GameSession;
+import com.example.fabiancitogames.utils.Routes;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -11,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Controller
 public class PongController {
 
-    private AtomicInteger connectedPlayers = new AtomicInteger(0);
+    private final AtomicInteger connectedPlayers = new AtomicInteger(0);
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final GameSession gameSession;
 
@@ -20,7 +21,7 @@ public class PongController {
         this.gameSession = new GameSession();
     }
 
-    @MessageMapping("/pong/join")
+    @MessageMapping(Routes.PONG_JOIN)
     public void joinGame(SimpMessageHeaderAccessor headerAccessor) {
         String sessionId = headerAccessor.getSessionId();
         if (sessionId == null) {
@@ -31,28 +32,26 @@ public class PongController {
         int playerRole = gameSession.assignRole(sessionId);
         System.out.println("Player joined: " + sessionId + " as role " + playerRole);
         simpMessagingTemplate.convertAndSend(
-                "/queue/role",
+                Routes.QUEUE_PONG_ROLE,
                 playerRole
         );
     }
 
-    @MessageMapping("/pong/ready")
+    @MessageMapping(Routes.PONG_READY)
     public void readyGame() {
         simpMessagingTemplate.convertAndSend(
-                "/game/ready",
+                Routes.QUEUE_PONG_READY,
                 connectedPlayers.incrementAndGet()
         );
     }
 
-    @MessageMapping("/pong/moveBall")
+    @MessageMapping(Routes.PONG_MOVE_BALL)
     public void sendBallMovement(BallMovement ballMovement) {
-        System.out.println("Ball movement received: " + ballMovement);
-        simpMessagingTemplate.convertAndSend("/game/ball", ballMovement);
+        simpMessagingTemplate.convertAndSend(Routes.GAME_PONG_BALL, ballMovement);
     }
 
-    @MessageMapping("/pong/movePaddle")
+    @MessageMapping(Routes.PONG_MOVE_PADDLE)
     public void sendPaddleMovement(PaddleMovement paddleMovement) {
-        System.out.println("Paddle movement received: " + paddleMovement);
-        simpMessagingTemplate.convertAndSend("/game/paddle", paddleMovement);
+        simpMessagingTemplate.convertAndSend(Routes.GAME_PONG_PADDLE, paddleMovement);
     }
 }
