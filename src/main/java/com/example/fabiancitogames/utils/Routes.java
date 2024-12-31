@@ -13,16 +13,19 @@ public class Routes {
     public static final String BALL = "/ball";
     public static final String PADDLE = "/paddle";
     public static final String MOVE_BALL = "/moveBall";
-    public static final String MOVE_PADDLE = "/movePaddle";
+    public static final String MOVE_PADDLE_LEFT = "/movePaddleLeft";
+    public static final String MOVE_PADDLE_RIGHT = "/movePaddleRight";
     public static final String PONG_READY = PONG + READY;
     public static final String PONG_JOIN = PONG + JOIN;
     public static final String PONG_EXIT = PONG + EXIT;
     public static final String QUEUE_PONG_ROLE = BASE_QUEUE + PONG + ROLE;
     public static final String QUEUE_PONG_READY = BASE_QUEUE + PONG + READY;
     public static final String GAME_PONG_BALL = BASE_GAME + PONG + BALL;
-    public static final String GAME_PONG_PADDLE = BASE_GAME + PONG + PADDLE;
+    public static final String GAME_PONG_PADDLE_LEFT = BASE_GAME + PONG + PADDLE + "/left";
+    public static final String GAME_PONG_PADDLE_RIGHT = BASE_GAME + PONG + PADDLE + "/right";
     public static final String PONG_MOVE_BALL =  PONG + MOVE_BALL;
-    public static final String PONG_MOVE_PADDLE = PONG + MOVE_PADDLE;
+    public static final String PONG_MOVE_PADDLE_LEFT = PONG + MOVE_PADDLE_LEFT;
+    public static final String PONG_MOVE_PADDLE_RIGHT = PONG + MOVE_PADDLE_RIGHT;
 
     // Only TicTacToe
     public static final String TICTACTOE = "/tictactoe";

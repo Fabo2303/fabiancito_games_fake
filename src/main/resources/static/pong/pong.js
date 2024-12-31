@@ -75,15 +75,20 @@ function connect() {
             drawPaddles();
         });
 
-        stompClient.subscribe(rutas.game_pong_paddle, (data) => {
+        stompClient.subscribe(rutas.game_pong_paddle_right, (data) => {
             const paddleMovement = JSON.parse(data.body);
-            if (paddleMovement.playerId === 1) {
-                player1.y = paddleMovement.positionY;
-            } else {
-                player2.y = paddleMovement.positionY;
+            if (playerRole === 1) {
+                return;
             }
-            drawBall();
-            drawPaddles();
+            player1.y = paddleMovement.positionY;
+        });
+
+        stompClient.subscribe(rutas.game_pong_paddle_left, (data) => {
+            const paddleMovement = JSON.parse(data.body);
+            if (playerRole === 2) {
+                return;
+            }
+            player2.y = paddleMovement.positionY;
         });
     });
 }
@@ -105,13 +110,14 @@ function sendPaddleMovement() {
             playerId: playerRole,
             positionY: player1.y
         };
+        stompClient.send('/app' + rutas.pong_move_paddle_right, {}, JSON.stringify(paddleMovement));
     } else {
         paddleMovement = {
             playerId: playerRole,
             positionY: player2.y
         };
+        stompClient.send('/app' + rutas.pong_move_paddle_left, {}, JSON.stringify(paddleMovement));
     }
-    stompClient.send('/app' + rutas.pong_move_paddle, {}, JSON.stringify(paddleMovement));
 }
 
 

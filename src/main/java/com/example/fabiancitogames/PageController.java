@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
 
     @GetMapping("/pong")
-    public String index() {
+    public String pong() {
         return "pong";
     }
 

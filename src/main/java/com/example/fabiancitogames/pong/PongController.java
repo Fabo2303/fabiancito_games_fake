@@ -50,8 +50,13 @@ public class PongController {
         simpMessagingTemplate.convertAndSend(Routes.GAME_PONG_BALL, ballMovement);
     }
 
-    @MessageMapping(Routes.PONG_MOVE_PADDLE)
+    @MessageMapping(Routes.PONG_MOVE_PADDLE_LEFT)
     public void sendPaddleMovement(PaddleMovement paddleMovement) {
-        simpMessagingTemplate.convertAndSend(Routes.GAME_PONG_PADDLE, paddleMovement);
+        simpMessagingTemplate.convertAndSend(Routes.GAME_PONG_PADDLE_LEFT, paddleMovement);
+    }
+
+    @MessageMapping(Routes.PONG_MOVE_PADDLE_RIGHT)
+    public void sendPaddleMovementRight(PaddleMovement paddleMovement) {
+        simpMessagingTemplate.convertAndSend(Routes.GAME_PONG_PADDLE_RIGHT, paddleMovement);
     }
 }
