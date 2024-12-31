@@ -1,7 +1,3 @@
-console.log("Pong game script loaded");
-console.log(rutas.base_game);
-console.log(rutas.base_game === '/game');
-
 const socket = new SockJS(rutas.base_game);
 const stompClient = Stomp.over(socket);
 

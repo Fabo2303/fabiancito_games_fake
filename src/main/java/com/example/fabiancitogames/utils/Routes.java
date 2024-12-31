@@ -24,4 +24,14 @@ public class Routes {
     public static final String PONG_MOVE_BALL =  PONG + MOVE_BALL;
     public static final String PONG_MOVE_PADDLE = PONG + MOVE_PADDLE;
 
+    // Only TicTacToe
+    public static final String TICTACTOE = "/tictactoe";
+    public static final String TICTACTOE_READY = TICTACTOE + READY;
+    public static final String TICTACTOE_JOIN = TICTACTOE + JOIN;
+    public static final String TICTACTOE_EXIT = TICTACTOE + EXIT;
+    public static final String QUEUE_TICTACTOE_ROLE = BASE_QUEUE + TICTACTOE + ROLE;
+    public static final String QUEUE_TICTACTOE_READY = BASE_QUEUE + TICTACTOE + READY;
+    public static final String GAME_TICTACTOE = BASE_GAME + TICTACTOE;
+    public static final String TICTACTOE_MOVE = TICTACTOE + "/move";
+
 }

@@ -13,9 +13,27 @@
     <h4>Player 1 - Player 2</h4>
     <h4><span id="player1-score">0</span> - <span id="player2-score">0</span></h4>
     <canvas id="tictactoe" width="600" height="600"></canvas>
+    <h3><span id="winner"></span></h3>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:inline="javascript">
+    const rutas = {
+        base_game: '[[${T(com.example.fabiancitogames.utils.Routes).BASE_GAME}]]',
+        tictactoe: '[[${T(com.example.fabiancitogames.utils.Routes).TICTACTOE}]]',
+        tictactoe_ready: '[[${T(com.example.fabiancitogames.utils.Routes).TICTACTOE_READY}]]',
+        tictactoe_join: '[[${T(com.example.fabiancitogames.utils.Routes).TICTACTOE_JOIN}]]',
+        tictactoe_exit: '[[${T(com.example.fabiancitogames.utils.Routes).TICTACTOE_EXIT}]]',
+        queue_tictactoe_role: '[[${T(com.example.fabiancitogames.utils.Routes).QUEUE_TICTACTOE_ROLE}]]',
+        queue_tictactoe_ready: '[[${T(com.example.fabiancitogames.utils.Routes).QUEUE_TICTACTOE_READY}]]',
+        game_tictactoe: '[[${T(com.example.fabiancitogames.utils.Routes).GAME_TICTACTOE}]]',
+        tictactoe_move: '[[${T(com.example.fabiancitogames.utils.Routes).TICTACTOE_MOVE}]]'
+    }
+
+    Object.keys(rutas).forEach(key => {
+        rutas[key] = rutas[key].replaceAll('"', '');
+    });
+</script>
     <script th:src="@{/tictactoe/tictactoe.js}"></script>
 </body>
 </html>
